@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Breast Cancer Dashboard</title>
+
+<script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="title-box">
+<h2>Breast Cancer Survival Dashboard</h2>
+</div>
+
+<div id="dashboardPage">
+
+<!-- KPI -->
+<div class="kpi-container">
+<div class="kpi-box">Average Survival <br><span id="avgSurvival"></span></div>
+<div class="kpi-box">Highest Survival Stage <br><span id="bestStage"></span></div>
+<div class="kpi-box">Stages Analyzed <br><span id="stageCount"></span></div>
+</div>
+
+<div class="content">
+
+<!-- SIDEBAR -->
+<div class="sidebar">
+<b>Stage</b>
+<button onclick="setStage(1)">Stage 1</button>
+<button onclick="setStage(2)">Stage 2</button>
+<button onclick="setStage(3)">Stage 3</button>
+<button onclick="setStage(4)">Stage 4</button>
+<button onclick="resetDashboard()">All</button>
+
+<br><b>Treatment</b>
+<button onclick="setTreatment('all')">All</button>
+<button onclick="setTreatment('chemo_yes')">Chemo</button>
+<button onclick="setTreatment('chemo_no')">No Chemo</button>
+</div>
+
+<!-- ✅ CHART AREA (THIS WAS MISSING) -->
+<div class="chart-container">
+
+<div class="chart-header">
+  
+
+  <h3 class="chart-title">Average Survival Across Cancer Stages and Treatments</h3>
+  <p class="chart-subtitle">
+  Click a bar to view detailed risk distribution on a separate page
+</p>
+
+<div class="compare-toggle">
+  <label><input type="radio" name="compare" value="none" checked> Default</label><br>
+  <label><input type="radio" name="compare" value="1v2"> Compare Stage 1 vs Stage 2</label><br>
+  <label><input type="radio" name="compare" value="1v4"> Compare Stage 1 vs Stage 4</label>
+</div>
+</div>
+
+<!-- ✅ REQUIRED SVG -->
+<svg width="750" height="350"></svg>
+
+<!-- ✅ TOOLTIP -->
+<div id="tooltip"></div>
+<div id="autoInsight" class="insight-box"></div>
+</div>
+</div>
+
+<button class="info-btn" onclick="openModal()">Project Info</button>
+
+<!-- MODAL -->
+<div id="modal" class="modal">
+<div class="modal-content">
+<span class="close" onclick="closeModal()">✖</span>
+<h3>Project Story</h3>
+<h3>Dashboard Overview</h3>
+
+<p>This dashboard shows how survival changes across different stages of breast cancer.</p>
+
+<p>It compares outcomes between chemotherapy and non-chemotherapy groups. Lower survival in chemotherapy cases does not indicate ineffective treatment, but reflects that these patients are typically in more advanced stages.</p>
+
+<p><b>Key Insight:</b> Survival decreases as cancer stage increases, highlighting the importance of early detection and timely treatment.</p>
+</div>
+</div>
+
+</div>
+
+<!-- ===== STAGE PAGE ===== -->
+<div id="stagePage" style="display:none">
+
+<h2 id="stageTitle" class="center-title"></h2>
+
+<div class="analysis-container">
+
+<div class="card">
+<h3>Survival Gap</h3>
+<div id="gapBar"></div>
+<div id="gapText"></div>
+<div id="gapPercent"></div>
+</div>
+
+<div class="card">
+<h3>Treatment Comparison</h3>
+<div id="compare"></div>
+</div>
+
+<div class="card">
+<h3>Risk Level</h3>
+<div id="riskBox"></div>
+</div>
+
+<div class="card full">
+<h3>Key Insight</h3>
+<p id="insightText"></p>
+<p id="meaningText"></p>
+</div>
+
+</div>
+
+<button class="back-btn" onclick="goBack()">← Back to Dashboard</button>
+
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>
