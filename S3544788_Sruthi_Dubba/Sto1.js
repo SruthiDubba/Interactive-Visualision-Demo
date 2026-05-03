@@ -285,7 +285,7 @@ Survival: ${Math.round(d.overall_survival_months)} months`
 .on("click",(event,d)=>{
 
 window.location.href =
-`sto2.html?size=${d.tumor_size}`;
+`Sto2.html?size=${d.tumor_size}`;
 
 });
 
